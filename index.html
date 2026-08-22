@@ -348,11 +348,11 @@
 // ============================================================
 // Pega aquí la URL de tu Worker (te la da Cloudflare al desplegarlo).
 // Ejemplo: "https://fuxionia.tuusuario.workers.dev"
-const WORKER_URL = "https://fuxionia.nahuelmendoza187.workers.dev";
+const WORKER_URL = "PEGA_AQUI_LA_URL_DE_TU_WORKER";
 
 // Si configuraste la variable APP_KEY en tu Worker (recomendado),
 // pon aquí el mismo valor. Si no la configuraste, deja el string vacío "".
-const APP_KEY = "franthina-fuxion-2026";
+const APP_KEY = "";
 // ============================================================
 
 const chipsData = [
@@ -428,7 +428,8 @@ async function generar(){
     const parsed = await response.json();
 
     if(!response.ok){
-      throw new Error(parsed.error || 'Fallo la conexión con el servicio de IA.');
+      const fullMsg = parsed.detail ? `${parsed.error} — ${parsed.detail}` : parsed.error;
+      throw new Error(fullMsg || 'Fallo la conexión con el servicio de IA.');
     }
 
     renderResults(parsed.respuestas || []);
